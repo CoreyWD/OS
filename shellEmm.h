@@ -80,22 +80,25 @@ class Directory
             subDirectories[i] -> timeStamp = now();
 	    return;
 	  }
-
-	else if(files.size() > 0) 
+        }
+      }
+      else if(files.size() > 0) 
+      {
+	for(unsigned int j = 0; j < files.size(); j++)
 	{
-	  if(files[i].name == x)
+	  if(files[j].name == x)
 	  {
-            files[i].timeStamp = now();
-          return;
+            files[j].timeStamp = now();
+            return;
 	  }
         }
-
       }
+      
       file fi(x);
       files.push_back(fi);
       return;
     
-      }
+      
     }
 
     //  removes file if it exists
