@@ -82,7 +82,7 @@ class Directory
 	  }
         }
       }
-      else if(files.size() > 0) 
+      if(files.size() > 0) 
       {
 	for(unsigned int j = 0; j < files.size(); j++)
 	{
@@ -96,6 +96,7 @@ class Directory
       
       file fi(x);
       files.push_back(fi);
+      
       return;
     
       
@@ -120,6 +121,15 @@ class Directory
     //  makes new subdirectory
     void mkdir(string x)
     {
+      for(unsigned int i = 0; i < subDirectories.size(); i++)
+      {
+        if(subDirectories[i] -> name == x)
+	{
+          cout << endl << "Directory of that name already exists";
+	  return;
+	}
+
+      }
       Directory * dir = new Directory(x);
       dir -> parent = this;
       dir -> WD = this -> WD + x + "/";
