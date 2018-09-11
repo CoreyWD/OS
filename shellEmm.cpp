@@ -3,12 +3,16 @@
 
 
 #include "shellEMM.h"
-//  one
+// gets input from user and stores in variables
 void GetInput(string& one, string& two);
 
-//  two
+// parses input gotten from GetInput, then calls relevant functions
 void runCommand(string& WD, Directory * & currentDirr, 
 		string& one, string& two, string& three);
+
+// recursively de-allocates any remaining data when user enters "quit"
+void cleanUp(Directory * & currentDirr);
+
 
 //
 //--------------------MAIN FUNCTION---------------------
@@ -50,6 +54,9 @@ int main()
     
   }
 
+  currentDirr = & Root;
+  cleanUp(currentDirr);
+  
   return 0;
 }
 
@@ -57,8 +64,24 @@ int main()
 //-------------------END OF MAIN-----------------------
 //
 
+// -----------------------------------------
+void cleanUp(Directory * & currentDirr)
+{
+  // removes any lingering files
+  if(currentDirr -> files.size() > 0)
+  {
+    currentDirr -> files.clear();
+  }
+  while(currentDirr -> subDirectories.size() > 0)
+  {
+    cleanUp(currentDirr -> subDirectories[0]); 
+    currentDirr -> eraseHelp();
+  }
+  
+}
 
-//  -------------------ONE----------------------
+
+//  -----------------------------------------
 void GetInput(string& one, string& two)
 {
   cin >> one;
@@ -69,7 +92,7 @@ void GetInput(string& one, string& two)
   return;
 }
 
-//  ------------------TWO----------------------
+//  ----------------------------------------
 void runCommand(string& WD, Directory * & currentDirr, 
 		string& one, string& two, string& three)
 {

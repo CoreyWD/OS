@@ -66,11 +66,18 @@ class Directory
 
     string timeStamp = now();
 
+    //  helper function for the cleanUp function in main
+    void eraseHelp()
+    {
+      delete subDirectories[0];
+      subDirectories.erase(subDirectories.begin());
+      return;
+    }
 
     //  updates timestamp on directories and files
     //  makes files if they don't exist yet
     void touch(string x)
-    {
+    { 
       if(subDirectories.size() > 0)
       {
         for(unsigned int i = 0; i < subDirectories.size(); i++)
@@ -93,7 +100,7 @@ class Directory
 	  }
         }
       }
-      
+            
       file fi(x);
       files.push_back(fi);
       
@@ -148,6 +155,8 @@ class Directory
 	  if(subDirectories[i] -> files.size() == 0 
 	      && subDirectories[i] -> subDirectories.size() == 0)
 	  {
+	    delete subDirectories[i];
+
             subDirectories.erase(subDirectories.begin() + i);
 	    return;
 	  }
@@ -296,7 +305,8 @@ class Directory
             cout << "-";
 	  }
 	}
-        cout << " user " << subDirectories[i] -> timeStamp 
+        cout << " USER " << "GROUP " << "FILESIZE "
+	     << subDirectories[i] -> timeStamp 
 	     << " " << subDirectories[i] -> name;
       }
 
@@ -314,7 +324,8 @@ class Directory
             cout << "-";
 	  }
 	}
-        cout << " user " << files[k].timeStamp << " " << files[k].name;
+        cout << " USER " << "GROUP " << "FILESIZE "
+             << files[k].timeStamp << " " << files[k].name;
 
       }
 
