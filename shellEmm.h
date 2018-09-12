@@ -78,34 +78,37 @@ class Directory
     //  makes files if they don't exist yet
     void touch(string x)
     { 
+
       if(subDirectories.size() > 0)
       {
         for(unsigned int i = 0; i < subDirectories.size(); i++)
         {
           if(subDirectories[i] -> name == x)
-	  {
+          {
             subDirectories[i] -> timeStamp = now();
-	    return;
-	  }
+            return;
+          }
         }
       }
-      if(files.size() > 0) 
+
+      if(files.size() > 0)
       {
-	for(unsigned int j = 0; j < files.size(); j++)
-	{
-	  if(files[j].name == x)
-	  {
+        for(unsigned int j = 0; j < files.size(); j++)
+        {
+          if(files[j].name == x)
+          {
             files[j].timeStamp = now();
             return;
-	  }
+          }
         }
       }
-            
+
+      //  creates file if file does not already exist
       file fi(x);
       files.push_back(fi);
-      
+
       return;
-    
+      
       
     }
 
@@ -128,6 +131,16 @@ class Directory
     //  makes new subdirectory
     void mkdir(string x)
     {
+      //  checks if file of current name already exists
+      for(unsigned int k = 0; k < files.size(); k++)
+      {
+        if(files[k].name == x)
+	{
+          cout << endl << "Cannot make Directory: File of same name exists";
+	  return;
+	}
+      }
+      //  checks if directory of current name already exists
       for(unsigned int i = 0; i < subDirectories.size(); i++)
       {
         if(subDirectories[i] -> name == x)
