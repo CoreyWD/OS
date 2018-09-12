@@ -72,6 +72,7 @@ void cleanUp(Directory * & currentDirr)
   {
     currentDirr -> files.clear();
   }
+  // recursively removes all directories
   while(currentDirr -> subDirectories.size() > 0)
   {
     cleanUp(currentDirr -> subDirectories[0]); 
@@ -151,7 +152,7 @@ void runCommand(string& WD, Directory * & currentDirr,
       {
         currentDirr -> rmdir(two);
       }
-      //  start of CD
+      //  start of CD --------
       if(one == "cd")
       {
         if(two == "..")
@@ -169,10 +170,11 @@ void runCommand(string& WD, Directory * & currentDirr,
 	  }
         }
       }     
-      //  End of CD
+      //  End of CD --------
     }
   
   }
+
   //  in cae first command is unknown
   else
   {

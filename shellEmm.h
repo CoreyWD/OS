@@ -76,6 +76,11 @@ class Directory
 
     //  updates timestamp on directories and files
     //  makes files if they don't exist yet
+    //
+    //  call from terminal with "touch name"
+    //  where name is eitehr the file to be created,
+    //  the file to be touched, or the directory to be
+    //  touched
     void touch(string x)
     { 
 
@@ -113,6 +118,9 @@ class Directory
     }
 
     //  removes file if it exists
+    //
+    //  call from terminal with "rm name"
+    //  where name is the file to be removed
     void rm(string x)
     {
       for(unsigned int i = 0; i < files.size(); i++)
@@ -129,6 +137,9 @@ class Directory
 
 
     //  makes new subdirectory
+    //
+    //  call from terminal with "mkdir name"
+    //  where name is what you want your new directory to be called
     void mkdir(string x)
     {
       //  checks if file of current name already exists
@@ -159,6 +170,9 @@ class Directory
     }
 
     //  removes subdirectory
+    //
+    //  call from terminal with "rmdir name"
+    //  where name is the directory you want to remove
     void rmdir(string x)
     {
       for(unsigned int i = 0; i < subDirectories.size(); i++)
@@ -189,6 +203,8 @@ class Directory
 
 
     //  prints directory
+    //
+    //  call from terminal with "ls"
     void ls()
     {
       for(unsigned int i = 0; i < subDirectories.size(); i++)
@@ -205,6 +221,11 @@ class Directory
     }
 
     //  changes file or directory privelages
+    //
+    //  call from terminal with "chmod name ---" 
+    //  where name is the name of file or directory 
+    //  want to touch, and --- is a three digit number 
+    //  between 000 and 777
     void chmod(string name, string x)
     {
       char temp;
@@ -300,6 +321,8 @@ class Directory
     }
  
     //  print to screen a more detailed list of directory contents
+    //
+    //  call from terminal with "ls -l"
     void lsLong()
     {
       char permissions[10] = {'d','r','w','x','r','w','x','r','w','x'};
